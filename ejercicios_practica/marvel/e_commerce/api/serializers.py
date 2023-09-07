@@ -15,11 +15,20 @@ from e_commerce.models import Comic, WishList
 
 class ComicSerializer(serializers.ModelSerializer):
     # new_field =  serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Comic
-        fields = ('marvel_id','title', 'description', 'price', 'stock_qty', 'picture')
+        fields = ('id', 'marvel_id', 'title', 'description', 'price', 'stock_qty', 'picture')
         # fields = ('marvel_id', 'title', 'algo')
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+
+        if 'view' in self.context and hasattr(self.context['view'], 'action'):
+            if self.context['view'].action == 'list_comics':
+                ret.pop('description', None)
+
+        return ret
 
     # def get_new_field(self, obj):
     #     return {'hola':10}

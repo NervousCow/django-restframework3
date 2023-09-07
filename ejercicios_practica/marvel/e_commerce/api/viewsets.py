@@ -198,7 +198,7 @@ class FilteringBackendUserViewSet(viewsets.ModelViewSet):
     # Permite ordenar el listado por los campos seleccionados.
     # NOTE: se requiere `OrderingFilter`.
     ordering_fields = ('pk', 'username')
-    ordering = ('pk',)  # ('-pk',)
+    ordering = ('-pk',)  # ('-pk',)
 
 
 class FilteringUserViewSet(viewsets.GenericViewSet):
