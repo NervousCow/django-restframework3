@@ -15,6 +15,8 @@ from rest_framework.pagination import (
 )
 
 
+# Esta es mi fuente de 'inspiracion' para solucionar el
+# ejercico 3.
 
 class FilteringBackendComicViewSetModel(viewsets.ModelViewSet):
     '''
@@ -27,8 +29,8 @@ class FilteringBackendComicViewSetModel(viewsets.ModelViewSet):
     http_method_names = ('get',)
     queryset = serializer_class.Meta.model.objects.all()
 
-    filter_backends = (DjangoFilterBackend,)
-    filter_backends = (DjangoFilterBackend, SearchFilter)
+    # filter_backends = (DjangoFilterBackend,)
+    # filter_backends = (DjangoFilterBackend, SearchFilter)
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     
 

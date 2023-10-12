@@ -21,6 +21,10 @@ class ComicSerializer(serializers.ModelSerializer):
         fields = ('id', 'marvel_id', 'title', 'description', 'price', 'stock_qty', 'picture')
         # fields = ('marvel_id', 'title', 'algo')
 
+    # metodo to_representation sobre escrito para NO mostrar
+    # la descripción (description) cuando en el contexto de la
+    # instancia hay una 'action' == 'list_comics'
+
     def to_representation(self, instance):
         ret = super().to_representation(instance)
 

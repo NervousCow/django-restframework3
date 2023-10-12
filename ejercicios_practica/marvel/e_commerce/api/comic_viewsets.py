@@ -19,6 +19,9 @@ from rest_framework.pagination import (
 from e_commerce.models import Comic, WishList
 from .serializers import ComicSerializer, WishListSerializer, UserSerializer
 
+
+# EJERCICIO 1
+
 class ComicViewSet(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = ComicSerializer
@@ -70,11 +73,29 @@ class ComicViewSet(viewsets.GenericViewSet):
             status=status.HTTP_204_NO_CONTENT
         )
 
+
+# EJERCICO 2
+
 class ComicViewSetModel(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = ComicSerializer
     http_method_names = ['get']
     queryset = serializer_class.Meta.model.objects.all()
+
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+
+    filterset_fields = {
+        "marvel_id": ("exact",),
+        "title": ("icontains",),
+        "stock_qty": ('gte',)
+    }
+
+    pagination_class = LimitOffsetPagination
+
+    search_fields = ('title',)
+
+    ordering_fields = ('marvel_id', 'title')
+    ordering = ('-marvel_id')
 
 # EJERCICIO 4
 
